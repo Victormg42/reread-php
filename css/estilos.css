@@ -1,11 +1,21 @@
 * {
     box-sizing: border-box;
+    font-family: monospace;
   }
   
   body {
     margin: 0;
   }
   
+  /* Style the logo */
+  .logo {
+    background-color: #0B5345;
+    padding: 20px;
+    text-align: left;
+    color: white;
+    font-size: 20px;
+  }
+
   /* Style the header */
   .header {
     background-color: #f1f1f1;
