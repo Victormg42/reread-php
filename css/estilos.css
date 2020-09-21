@@ -114,4 +114,13 @@
     .column.left, .column.right, .topnav a, .ebook {
       width: 100%;
     }
+
+    .header p{
+      padding: 0;
+    }
+
+    .topnav a {
+      width: 100%;
+      font-size: 25px;
+    }
   }
