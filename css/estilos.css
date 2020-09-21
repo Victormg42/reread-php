@@ -87,6 +87,21 @@
     width: 100%;
   }
 
+  .ebook {
+    float: left;
+    width: 33.3%;
+    padding: 20px;
+  }
+
+  .ebook img {
+    width: 100%;
+  }
+
+  .ebook:hover{
+    background-color: red;
+    color: white;
+  }
+
   /* Clear floats after the columns */
   .row:after {
     content: "";
@@ -96,7 +111,7 @@
   
   /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 600px) {
-    .column.left, .column.right, .topnav a {
+    .column.left, .column.right, .topnav a, .ebook {
       width: 100%;
     }
   }
