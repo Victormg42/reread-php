@@ -26,6 +26,34 @@
           <a href="ebooks.php">eBooks</a>
         </div>
     <h3>Toda la actualidad en eBook</h3>
+    <!---
+    <div class="gallery">
+        <img src="../img/cell.jpeg" alt="Cell">
+        <div class="desc">A través de los teléfonos móviles se envía un mensaje que convierte a todos en esclavos asesinos...</div>
+      </div>
+    -->
+    <?php
+    // 1. Conexión con la base de datos
+    include '../services/connection.php';
+
+    // 2. Selección y muestra de datos de la base de datos
+    $result = msqli_query($conn, "SELECT Books.Description, Books.img, Books.Title FROM Books");
+
+    if (!empty($result) && mysqli_num_rows($result) > 0) {
+      // datos de salida de cada fila (fila = row)
+      while ($row = mysqli_fetch_array($result)) {
+        echo "<div class='gallery'>";
+        // Añadimos la imagen a la página con la etiqueta img de HTML
+        echo "<img src=../img/".$row['img']." alt='".$row['Title']."'>";
+        // Añadimos el título a la página con la etiqueta h2 de HTML
+        // echo "<div class='desc'".$row['Title']."</div>";
+        echo "</div>";
+      }
+    } else {
+      echo "0 resultados";
+    }
+    ?>
+
     <div class="ebook">
       <a href="https://www.casadellibro.com/libro-el-ciclo-del-hombre-lobo/9788499081281/1819674"><img src="../img/elciclodelhombrelobo.jpeg" alt="ebook 1">
       <div>El Ciclo del Hombre Lobo</div></a>

@@ -1,8 +1,8 @@
 <?php
 $host="localhost";
 $user="root";
-$pass="qweQWE123"
-$db="reread_bd"
+$pass="qweQWE123";
+$db="reread_bd";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 if (!$conn) {
