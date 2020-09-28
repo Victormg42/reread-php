@@ -37,12 +37,12 @@
     include '../services/connection.php';
 
     // 2. Selección y muestra de datos de la base de datos
-    $result = msqli_query($conn, "SELECT Books.Description, Books.img, Books.Title FROM Books");
+    $result = mysqli_query($conn, "SELECT Books.Description, Books.img, Books.Title FROM Books");
 
     if (!empty($result) && mysqli_num_rows($result) > 0) {
       // datos de salida de cada fila (fila = row)
       while ($row = mysqli_fetch_array($result)) {
-        echo "<div class='gallery'>";
+        echo "<div class='ebook'>";
         // Añadimos la imagen a la página con la etiqueta img de HTML
         echo "<img src=../img/".$row['img']." alt='".$row['Title']."'>";
         // Añadimos el título a la página con la etiqueta h2 de HTML
@@ -72,13 +72,20 @@
     </div>
   </div>
   
-  <div class="column right">
-    <h2>Top Ventas</h2>
-    <p>Cien años de soledad.</p>
-    <p>Crónica de una muerte anunciada.</p>
-    <p>El otoño del patriarca.</p>
-    <p>El general en su laberinto.</p>
-  </div>
+  <?php
+  $result = mysqli_query($conn, "SELECT Books.Title FROM Books WHERE Top = 1");
+  if (!empty($result) && mysqli_num_rows($result) > 0) {
+    echo  "<h2>Top Ventas</h2>";
+    // datos de salida de cada fila (fila = row)
+    while ($row = mysqli_fetch_array($result)) {
+    echo "<div style='margin-top: -30px;' class='column right'>";
+    echo "<p>".$row['Title']."</p>";
+    echo "</div>";
+    }
+  } else {
+    echo "Sin resultados";
+  }
+  ?>
 </div>
   
 </body>
