@@ -37,48 +37,43 @@
     include '../services/connection.php';
 
     // 2. Selección y muestra de datos de la base de datos
-    $result = msqli_query($conn, "SELECT Books.Description, Books.img, Books.Title FROM Books");
+    $result = mysqli_query($conn, "SELECT Books.Description, Books.img, Books.Title FROM Books");
 
     if (!empty($result) && mysqli_num_rows($result) > 0) {
       // datos de salida de cada fila (fila = row)
+      $i=0;
       while ($row = mysqli_fetch_array($result)) {
-        echo "<div class='gallery'>";
+        $i++;
+        echo "<div class='ebook'>";
         // Añadimos la imagen a la página con la etiqueta img de HTML
         echo "<img src=../img/".$row['img']." alt='".$row['Title']."'>";
         // Añadimos el título a la página con la etiqueta h2 de HTML
-        // echo "<div class='desc'".$row['Title']."</div>";
+        echo "<div class='desc'>".$row['Description']."</div>";
         echo "</div>";
+        if ($i%3==0) {
+          echo "<div style='clear:both;'></div>";
+        }
       }
     } else {
       echo "0 resultados";
     }
     ?>
-
-    <div class="ebook">
-      <a href="https://www.casadellibro.com/libro-el-ciclo-del-hombre-lobo/9788499081281/1819674"><img src="../img/elciclodelhombrelobo.jpeg" alt="ebook 1">
-      <div>El Ciclo del Hombre Lobo</div></a>
-    </div>
-    <div class="ebook">
-      <a href="https://www.casadellibro.com/libro-las-tinieblas-y-el-alba/9788401022876/11595826"><img src="../img/imagen1.jpg" alt="ebook 2">
-      <div>Las Tinieblas y el Alba</div></a>
-    </div>
-    <div class="ebook">
-      <a href="https://www.casadellibro.com/libro-sol-de-medianoche-saga-crepusculo-5/9788420456591/11651147"><img src="../img/imagen2.jpg" alt="ebook 3">
-      <div>Sol de Medianoche</div></a>
-    </div>
-    <div class="ebook">
-      <a href="https://www.casadellibro.com/libro-mientras-escribo/9788497597326/907511"><img src="../img/mientrasescribo.jpeg" alt="ebook 4">
-      <div>Mientras Escribo</div></a>
-    </div>
   </div>
   
-  <div class="column right">
-    <h2>Top Ventas</h2>
-    <p>Cien años de soledad.</p>
-    <p>Crónica de una muerte anunciada.</p>
-    <p>El otoño del patriarca.</p>
-    <p>El general en su laberinto.</p>
-  </div>
+  <?php
+  echo  "<h2>Top Ventas</h2>";
+  $result = mysqli_query($conn, "SELECT Books.Title FROM Books WHERE Top = 1");
+  if (!empty($result) && mysqli_num_rows($result) > 0) {
+    // datos de salida de cada fila (fila = row)
+    while ($row = mysqli_fetch_array($result)) {
+    echo "<div style='margin-top: -30px;' class='column right'>";
+    echo "<p>".$row['Title']."</p>";
+    echo "</div>";
+    }
+  } else {
+    echo "Sin resultados";
+  }
+  ?>
 </div>
   
 </body>
