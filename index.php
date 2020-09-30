@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="css/estilos.css">
+<script src="./javascript/code.js"></script>
 </head>
 <body>
 
@@ -33,9 +34,9 @@
   
   <?php
   include './services/connection.php';
+  echo  "<h2>Top Ventas</h2>";
   $result = mysqli_query($conn, "SELECT Books.Title FROM Books WHERE Top = 1");
   if (!empty($result) && mysqli_num_rows($result) > 0) {
-    echo  "<h2>Top Ventas</h2>";
     // datos de salida de cada fila (fila = row)
     while ($row = mysqli_fetch_array($result)) {
     echo "<div style='margin-top: -30px;' class='column right'>";
