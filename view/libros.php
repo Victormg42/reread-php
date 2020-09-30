@@ -15,8 +15,10 @@
   <p>En Re-Read podrás encontrar libros de segunda mano en perfecto estado. También vender los tuyos. Porque siempre hay libros leídos y libros por leer. Por eso Re-compramos y Re-vendemos para que nunca te quedes sin ninguno de los dos.</p>
 </div>
 
-
-
+<?php
+    // 1. Conexión con la base de datos
+    include '../services/connection.php';
+    ?>
 <div class="row">
  
   <div class="column left">
@@ -40,13 +42,20 @@
     <p>En Re-Read compramos tus libros para darles una segunda vida. Los compramos todos al mismo precio: 0,20 euros. Siempre hay libros leídos y libros por leer. Por eso Re-compramos y Re-vendemos para que nunca te quedes sin ninguno de los dos.</p>
   </div>
   
-  <div class="column right">
-    <h2>Top Ventas</h2>
-    <p>Cien años de soledad.</p>
-    <p>Crónica de una muerte anunciada.</p>
-    <p>El otoño del patriarca.</p>
-    <p>El general en su laberinto.</p>
-  </div>
+  <?php
+  $result = mysqli_query($conn, "SELECT Books.Title FROM Books WHERE Top = 1");
+  if (!empty($result) && mysqli_num_rows($result) > 0) {
+    echo  "<h2>Top Ventas</h2>";
+    // datos de salida de cada fila (fila = row)
+    while ($row = mysqli_fetch_array($result)) {
+    echo "<div style='margin-top: -30px;' class='column right'>";
+    echo "<p>".$row['Title']."</p>";
+    echo "</div>";
+    }
+  } else {
+    echo "Sin resultados";
+  }
+  ?>
 </div>
   
 </body>
